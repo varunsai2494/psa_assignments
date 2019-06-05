@@ -5,6 +5,8 @@
  */
 package elasticcomputing;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -14,6 +16,7 @@ import java.util.Queue;
  */
 public class server extends Thread {
     public Queue<Integer> q = new LinkedList<>();
+    HashMap<Integer, Long> map = new HashMap<>(); 
     public int maxLimit = 10;
      public static void proccess(){
          try{
@@ -30,7 +33,10 @@ public class server extends Thread {
          return q.size()==0;
      }
      public void insertIntoQ(int i){
+         Date date = new Date();
+         long timeMilli = date.getTime();
          q.add(i);
+         map.put(i,timeMilli);
      }
      public boolean canExecute(){
          return q.size()<maxLimit;
@@ -40,7 +46,10 @@ public class server extends Thread {
          while(true){
             if(!q.isEmpty()){
                 proccess();
-                q.remove();
+                int k = q.remove();
+                Date date = new Date();
+                long timeMilli = date.getTime();
+                map.put(k, timeMilli-map.get(k));
             }
         }
          
