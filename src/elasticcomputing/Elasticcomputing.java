@@ -7,7 +7,7 @@ package elasticcomputing;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import static elasticcomputing.server.proccess;
+import elasticcomputing.server;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -21,7 +21,7 @@ public class Elasticcomputing {
      * @param args the command line arguments
      */
     public static void Dispatcher(int requestrate,int serverCapacity,int processingTime) {
-        server s = new server();
+        server s = new server(serverCapacity,requestrate);
         l.add(s);
         s.start();
         for(int k=0;k<50;k++){
@@ -50,7 +50,7 @@ public class Elasticcomputing {
                 }
                 
                 if(!toggle){
-                    server temp = new server();
+                    server temp = new server(serverCapacity,requestrate);
                     l.add(temp);
                     temp.start();
                     temp.insertIntoQ(qval);

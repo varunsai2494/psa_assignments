@@ -17,10 +17,15 @@ import java.util.Queue;
 public class server extends Thread {
     public Queue<Integer> q = new LinkedList<>();
     HashMap<Integer, Long> map = new HashMap<>(); 
-    public int maxLimit = 10;
-     public static void proccess(){
+    public int maxLimit;
+    public int proccessingtime;
+    public server(int maxlimit,int proccessingtime){
+        this.maxLimit = maxlimit;
+        this.proccessingtime = proccessingtime;
+    }
+     public void proccess(){
          try{
-             Thread.sleep(10);
+             Thread.sleep(this.proccessingtime);
          }
          catch(Exception e){
          }
