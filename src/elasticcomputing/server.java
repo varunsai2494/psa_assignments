@@ -54,7 +54,5 @@ public class server extends Thread {
         }
          
      }  
-     public static void main(String[] args)  throws InterruptedException{
-        
-    }
+     
 }
