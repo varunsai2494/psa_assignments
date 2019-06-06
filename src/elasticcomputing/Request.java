@@ -13,6 +13,7 @@ public class Request {
     public int server;
     public int request_id;
     public long response_time;
+    public String status="pending";
     public static int count = 1;
     public Request(long response_time){
 //            this.server = server;

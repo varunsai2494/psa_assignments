@@ -5,11 +5,8 @@
  */
 package userInterface;
 import elasticcomputing.Elasticcomputing;
-import elasticcomputing.server;
 import elasticcomputing.Request;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -60,8 +57,6 @@ public class elasticComputingUI extends javax.swing.JFrame {
 
         threadStatusTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
                 {null, null, null},
                 {null, null, null}
             },
@@ -201,11 +196,22 @@ public class elasticComputingUI extends javax.swing.JFrame {
 //                    System.out.println(pair.getValue());
 //                }
 //        }
+        
+//        model.addRow(new Object[]{"fghjk","ytgui","tfghj"});
+        int increment = 0;
         while(true){
-            DefaultTableModel model = (DefaultTableModel) threadStatusTbl.getModel();
-            for(Request r: dispatcher.getRequest()){
-                model.addRow(new Object[]{r.request_id,r.server, r.response_time});
-            }
+                DefaultTableModel model = (DefaultTableModel) threadStatusTbl.getModel();
+                model.setRowCount(0);
+                List<Request> requests = dispatcher.getRequest();
+                
+                for(int i = requests.size()-1; i>=0; i--){
+                    Request r = requests.get(i);
+                    if(r.status.equals("complete")){
+                        model.addRow(new Object[]{String.valueOf(r.request_id),String.valueOf(r.server),String.valueOf(r.response_time)});
+                    }
+                    
+                }
+//            increment = requests.size();
         }
         
         

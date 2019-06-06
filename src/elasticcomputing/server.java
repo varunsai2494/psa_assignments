@@ -60,6 +60,7 @@ public class server extends Thread {
                 Date date = new Date();
                 long timeMilli = date.getTime();
                 r.response_time = timeMilli - r.response_time;
+                r.status = "complete";
 //                map.put(k, timeMilli-map.get(k));
             }
         }
