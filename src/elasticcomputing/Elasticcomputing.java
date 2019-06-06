@@ -20,7 +20,7 @@ public class Elasticcomputing {
     /**
      * @param args the command line arguments
      */
-    public static void Dispatcher(int requestrate,int serverCapacity,int processingTime) {
+    public static void Dispatcher(int requestrate,int timeSpan,int serverCapacity,int processingTime) {
         server s = new server(serverCapacity,requestrate);
         l.add(s);
         s.start();

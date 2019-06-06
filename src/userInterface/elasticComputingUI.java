@@ -5,6 +5,8 @@
  */
 package userInterface;
 import elasticcomputing.Elasticcomputing;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author imperio2494
@@ -30,7 +32,8 @@ public class elasticComputingUI extends javax.swing.JFrame {
 
         splitpane = new javax.swing.JSplitPane();
         rightPanel = new javax.swing.JPanel();
-        textArea = new java.awt.TextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        threadStatusTbl = new javax.swing.JTable();
         leftPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -39,26 +42,41 @@ public class elasticComputingUI extends javax.swing.JFrame {
         serverCptyTB = new javax.swing.JTextField();
         processTimeTB = new javax.swing.JTextField();
         beginBtn = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        timeSpanTB = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         splitpane.setDividerLocation(160);
+
+        threadStatusTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "requestId", "Service", "Processing Time"
+            }
+        ));
+        jScrollPane1.setViewportView(threadStatusTbl);
 
         javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);
         rightPanel.setLayout(rightPanelLayout);
         rightPanelLayout.setHorizontalGroup(
             rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rightPanelLayout.createSequentialGroup()
-                .addGap(151, 151, 151)
-                .addComponent(textArea, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addGap(61, 61, 61)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(362, Short.MAX_VALUE))
         );
         rightPanelLayout.setVerticalGroup(
             rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rightPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(textArea, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         splitpane.setRightComponent(rightPanel);
@@ -76,6 +94,8 @@ public class elasticComputingUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("timespan");
+
         javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
         leftPanel.setLayout(leftPanelLayout);
         leftPanelLayout.setHorizontalGroup(
@@ -84,17 +104,19 @@ public class elasticComputingUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addGroup(leftPanelLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(beginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(serverCptyTB, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(requestRateTb, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(89, 89, 89))
             .addGroup(leftPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(processTimeTB, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(serverCptyTB, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(beginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(processTimeTB, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4)
+                    .addComponent(timeSpanTB, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         leftPanelLayout.setVerticalGroup(
@@ -105,6 +127,10 @@ public class elasticComputingUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(requestRateTb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(timeSpanTB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(serverCptyTB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -114,7 +140,7 @@ public class elasticComputingUI extends javax.swing.JFrame {
                 .addComponent(processTimeTB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(beginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         splitpane.setLeftComponent(leftPanel);
@@ -135,19 +161,17 @@ public class elasticComputingUI extends javax.swing.JFrame {
 
     private void beginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beginBtnActionPerformed
         // TODO add your handling code here:
-        int i=0;
-        beginBtn.setText("asdfasd");
-        textArea.setText("asdf");
-        while(i<200){
-                i++;
-                
-                textArea.append("\n fjhasdf");}
-//        int requestrate=Integer.parseInt(requestRateTb.getText());
-//        int serverCapacity=Integer.parseInt(serverCptyTB.getText());
-//        int processingTime=Integer.parseInt(processTimeTB.getText());
-//        Elasticcomputing.Dispatcher(requestrate,serverCapacity,processingTime);
         
         
+        
+        int requestrate=Integer.parseInt(requestRateTb.getText());
+        int serverCapacity=Integer.parseInt(serverCptyTB.getText());
+        int processingTime=Integer.parseInt(processTimeTB.getText());
+        int timespan=Integer.parseInt(timeSpanTB.getText());
+        Elasticcomputing.Dispatcher(requestrate,timespan,serverCapacity,processingTime);
+        
+        DefaultTableModel model = (DefaultTableModel) threadStatusTbl.getModel();
+        model.addRow(new Object[]{"Column 1", "Column 2", "Column 3"});
         
     }//GEN-LAST:event_beginBtnActionPerformed
 
@@ -191,12 +215,15 @@ public class elasticComputingUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JTextField processTimeTB;
     private javax.swing.JTextField requestRateTb;
     private javax.swing.JPanel rightPanel;
     private javax.swing.JTextField serverCptyTB;
     private javax.swing.JSplitPane splitpane;
-    private java.awt.TextArea textArea;
+    private javax.swing.JTable threadStatusTbl;
+    private javax.swing.JTextField timeSpanTB;
     // End of variables declaration//GEN-END:variables
 }
