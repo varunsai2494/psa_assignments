@@ -6,9 +6,13 @@
 package userInterface;
 import elasticcomputing.Elasticcomputing;
 import elasticcomputing.Request;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,6 +29,21 @@ public class elasticComputingUI extends javax.swing.JFrame {
         initComponents();
         dispatcher = new Elasticcomputing();
         dispatcher.start();
+//        for(int i in )
+       
+        Timer timer = new Timer(0, new ActionListener() {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.print("pop123");
+            
+            populateTable();
+//           
+   }
+});
+
+    timer.setDelay(1000); // delay for 30 seconds
+    timer.start();
     }
 
     /**
@@ -198,12 +217,38 @@ public class elasticComputingUI extends javax.swing.JFrame {
 //        }
         
 //        model.addRow(new Object[]{"fghjk","ytgui","tfghj"});
-        int increment = 0;
-        while(true){
-                DefaultTableModel model = (DefaultTableModel) threadStatusTbl.getModel();
+
+//        int increment = 0;
+//        while(true){
+//                DefaultTableModel model = (DefaultTableModel) threadStatusTbl.getModel();
+//                model.setRowCount(0);
+//                List<Request> requests = dispatcher.getRequest();
+//                
+//                for(int i = requests.size()-1; i>=0; i--){
+//                    Request r = requests.get(i);
+//                    if(r.status.equals("complete")){
+//                        model.addRow(new Object[]{String.valueOf(r.request_id),String.valueOf(r.server),String.valueOf(r.response_time)});
+//                    }
+//                    
+//                }
+////            increment = requests.size();
+//        }
+        
+    
+        
+        
+        
+    }//GEN-LAST:event_beginBtnActionPerformed
+
+    
+    
+    
+    public  void populateTable(){
+         System.out.println(new Date());
+         DefaultTableModel model = (DefaultTableModel) threadStatusTbl.getModel();
                 model.setRowCount(0);
                 List<Request> requests = dispatcher.getRequest();
-                
+//                System.out.print("aaaaaa"+String.valueOf(requests.size()));
                 for(int i = requests.size()-1; i>=0; i--){
                     Request r = requests.get(i);
                     if(r.status.equals("complete")){
@@ -211,14 +256,9 @@ public class elasticComputingUI extends javax.swing.JFrame {
                     }
                     
                 }
-//            increment = requests.size();
+         System.out.println(new Date());
+        
         }
-        
-        
-        
-        
-    }//GEN-LAST:event_beginBtnActionPerformed
-
     /**
      * @param args the command line arguments
      */
