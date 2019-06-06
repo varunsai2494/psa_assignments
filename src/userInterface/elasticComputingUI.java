@@ -5,6 +5,13 @@
  */
 package userInterface;
 import elasticcomputing.Elasticcomputing;
+import elasticcomputing.server;
+import elasticcomputing.Request;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -12,13 +19,15 @@ import javax.swing.table.DefaultTableModel;
  * @author imperio2494
  */
 public class elasticComputingUI extends javax.swing.JFrame {
-
+    private Elasticcomputing dispatcher;
     /**
      * Creates new form elasticComputingUI
      */
     
     public elasticComputingUI() {
         initComponents();
+        dispatcher = new Elasticcomputing();
+        dispatcher.start();
     }
 
     /**
@@ -168,10 +177,39 @@ public class elasticComputingUI extends javax.swing.JFrame {
         int serverCapacity=Integer.parseInt(serverCptyTB.getText());
         int processingTime=Integer.parseInt(processTimeTB.getText());
         int timespan=Integer.parseInt(timeSpanTB.getText());
-        Elasticcomputing.Dispatcher(requestrate,timespan,serverCapacity,processingTime);
+        int count=0;
+        dispatcher.setServerCapacity(serverCapacity);
+        dispatcher.setProcessingTime(processingTime);
+        for(int k=0;k<timespan;k++){
+            for(int l=0;l<requestrate;l++){
+                try {
+                    Thread.sleep(1000/requestrate);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Elasticcomputing.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                this.dispatcher.addtoQ(count);
+                count++;
+            }
+            
+        }
+//        for(server i: dispatcher.getL()){
+//                HashMap<Integer, Long> server_stats = i.getMap();
+//                Iterator it = server_stats.entrySet().iterator();
+//                while (it.hasNext()) {
+//                    Map.Entry pair = (Map.Entry)it.next();
+//                    System.out.println(pair.getKey());
+//                    System.out.println(pair.getValue());
+//                }
+//        }
+        while(true){
+            DefaultTableModel model = (DefaultTableModel) threadStatusTbl.getModel();
+            for(Request r: dispatcher.getRequest()){
+                model.addRow(new Object[]{r.request_id,r.server, r.response_time});
+            }
+        }
         
-        DefaultTableModel model = (DefaultTableModel) threadStatusTbl.getModel();
-        model.addRow(new Object[]{"Column 1", "Column 2", "Column 3"});
+        
+        
         
     }//GEN-LAST:event_beginBtnActionPerformed
 

@@ -9,23 +9,27 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
-
+import elasticcomputing.Request;
 /**
  *
  * @author root
  */
 public class server extends Thread {
-    public Queue<Integer> q = new LinkedList<>();
-    HashMap<Integer, Long> map = new HashMap<>(); 
+    public Queue<Request> q = new LinkedList<>();
     public int maxLimit;
-    public int proccessingtime;
-    public server(int maxlimit,int proccessingtime){
+    public int processingtime;
+    private int server_id;
+    public static int count = 1;
+    
+    public server(int maxlimit,int processingtime){
         this.maxLimit = maxlimit;
-        this.proccessingtime = proccessingtime;
+        this.processingtime = processingtime;
+        server_id = count;
+        count++;
     }
-     public void proccess(){
+     public void process(){
          try{
-             Thread.sleep(this.proccessingtime);
+             Thread.sleep(this.processingtime);
          }
          catch(Exception e){
          }
@@ -37,11 +41,12 @@ public class server extends Thread {
      public boolean qisEmpty(){
          return q.size()==0;
      }
-     public void insertIntoQ(int i){
+     public void insertIntoQ(Request r){
          Date date = new Date();
          long timeMilli = date.getTime();
-         q.add(i);
-         map.put(i,timeMilli);
+         r.server = server_id;
+         q.add(r);
+//         map.put(i,timeMilli);
      }
      public boolean canExecute(){
          return q.size()<maxLimit;
@@ -50,14 +55,16 @@ public class server extends Thread {
          System.out.println("thread is running...");
          while(true){
             if(!q.isEmpty()){
-                proccess();
-                int k = q.remove();
+                process();
+                Request r = q.remove();
                 Date date = new Date();
                 long timeMilli = date.getTime();
-                map.put(k, timeMilli-map.get(k));
+                r.response_time = timeMilli - r.response_time;
+//                map.put(k, timeMilli-map.get(k));
             }
         }
          
      }  
+
      
 }
